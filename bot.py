@@ -16,6 +16,11 @@ from telegram.ext.dispatcher import run_async
 
 import settings
 
+# override settings is local settings exist
+import sys
+sys.path.append("~/")
+import rrbot_settings as settings
+
 # Enable logging
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -25,7 +30,7 @@ logger = logging.getLogger(__name__)
 
 __tasks = set()
 
-bot = Bot(settings.TOKEN);
+bot = Bot(settings.TOKEN)
 
 undeliveredMessages = []
 def average(lst): 
@@ -70,7 +75,7 @@ def error(update, context):
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 
-def __is_out_all(cmd: str) -> (str, bool):
+def __is_out_all(cmd: str) -> (str,bool):
     param = 'oa;'
     if cmd.startswith(param):
         return cmd[len(param):], True
