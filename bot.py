@@ -16,10 +16,10 @@ from telegram.ext.dispatcher import run_async
 
 import settings
 
-# override settings is local settings exist
-import sys
-sys.path.append("~/")
-import rrbot_settings as settings
+# # override settings is local settings exist
+# import sys
+# sys.path.append("~/")
+# import rrbot_settings as settings
 
 # Enable logging
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
