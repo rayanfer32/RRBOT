@@ -1,8 +1,3 @@
-* Setup
-```sh
-
-```
-
 * Deploy in terminal
 ```sh
 git clone https://github.com/Rayanfer32/RRBOT.git
@@ -10,6 +5,13 @@ pip3 install -r requirements.txt
 cd RRBOT
 python3 bot.py
 ```
+
+* Setup
+
+create `.env` file in the RRBOT directory
+add this line 
+`RRBOT_TOKEN=YOUR_BOT_TOKEN` 
+
 
 * Bot Commands
 ```bash
