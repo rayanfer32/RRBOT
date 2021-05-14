@@ -1,6 +1,12 @@
+* Setup
+```sh
+
+```
+
 * Deploy in terminal
 ```sh
 git clone https://github.com/Rayanfer32/RRBOT.git
+pip3 install -r requirements.txt
 cd RRBOT
 python3 bot.py
 ```
