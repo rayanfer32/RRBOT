@@ -1,6 +1,7 @@
-* Deploy in terminal as user
-```bash
-wget -nv -O RRnetPibot.zip https://repl.it/@Rayanfer32/RRnetPibot.zip;unzip -o RRnetPibot.zip;python3 bot.py
+* Deploy in terminal
+```sh
+git clone https://github.com/Rayanfer32/RRBOT.git
+python3 bot.py
 ```
 
 * Bot Commands
