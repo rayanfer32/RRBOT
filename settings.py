@@ -1,6 +1,6 @@
 import os
 
-TOKEN = os.environ.get("TELEGRAM_API_TOKEN")
+TOKEN = os.environ.get("RRBOT_TOKEN")
 
 ENABLED_USERS = os.environ.get("ENABLED_USERS", '1024316776,628650705')
 ENABLED_USERS = set(int(e.strip()) for e in ENABLED_USERS.split(','))
