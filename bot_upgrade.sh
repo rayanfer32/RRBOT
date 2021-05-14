@@ -1,1 +1,4 @@
-wget -nv -O RRnetPibot.zip https://repl.it/@Rayanfer32/RRnetPibot.zip;unzip -o RRnetPibot.zip;python3 bot.py
+rm -rf RRBOT
+git clone https://github.com/Rayanfer32/RRBOT.git
+cd RRBOT
+python3 bot.py
