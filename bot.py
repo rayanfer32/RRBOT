@@ -281,6 +281,8 @@ def packetLossNotifier():
             logger.info("packetLossNotifier on Sleep.")
             notifyUsers("packetLossNotifier on Sleep.")
             time.sleep(settings.PINGER_SLEEP_DURATION * 3600) # sleep for * hours
+            logger.info("packetLossNotifier Resumed.")
+            notifyUsers("packetLossNotifier Resumed.")
 
         pingServers = settings.PING_SERVERS
 
