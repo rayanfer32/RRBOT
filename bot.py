@@ -8,6 +8,7 @@ import time
 from functools import wraps
 import random
 import threading
+from datetime import datetime
 
 print("Loading Bot Modules...")
 import delegator
@@ -274,6 +275,13 @@ def packetLossNotifier():
   serverId = 0 # counter for picking server sequentially
 
   while True:
+    # check for sleep time
+    now = datetime.now()
+    if(settings.PINGER_STOP_TIME == now.hour):
+        logger.info("packetLossNotifier on Sleep.")
+        notifyUsers("packetLossNotifier on Sleep.")
+        time.sleep(settings.PINGER_SLEEP_DURATION * 3600) # sleep for * hours
+
     pingServers = settings.PING_SERVERS
 
     # Increment serverId
