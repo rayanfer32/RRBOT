@@ -8,10 +8,9 @@ python3 bot.py
 
 * Setup
 
-create `.env` file in the RRBOT directory
+create `secrets.env` file in the RRBOT directory
 add this line 
-`RRBOT_TOKEN=YOUR_BOT_TOKEN` 
-
+`BOT_TOKEN=YOUR_BOT_TOKEN` 
 
 * Bot Commands
 ```bash

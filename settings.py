@@ -1,12 +1,17 @@
 import os
+from dotenv import load_dotenv
+load_dotenv("secrets.env")
 
-TOKEN = os.environ.get("RRBOT_TOKEN")
+TOKEN = os.environ.get("BOT_TOKEN", os.getenv("BOT_TOKEN"))
 
 ENABLED_USERS = os.environ.get("ENABLED_USERS", '1024316776,628650705')
 ENABLED_USERS = set(int(e.strip()) for e in ENABLED_USERS.split(','))
 
 PING_SERVERS = ["www.google.com",
 "www.whatsapp.com",
+"www.primevideo.com",
+"www.pulsesecure.net",
+"www.webex.com",
 "www.bing.com",
 "www.facebook.com",
 '8.8.8.8',
@@ -14,6 +19,7 @@ PING_SERVERS = ["www.google.com",
 "1.1.1.1",
 "meet.google.com",
 'www.instagram.com',
+"103.89.235.174",
 'www.youtube.com',
 'www.speedtest.net',
 'www.fast.com',
@@ -27,9 +33,15 @@ PING_SERVERS = ["www.google.com",
 "www.robosoftin.com",
 "www.spotify.com",
 "www.flipkart.com",
-"www.wikipedia.org",
+"103.89.235.174",
 "www.hotstar.com",
 "www.sophos.com",
+"www.botim.me",
+"www.zomato.com",
+"www.swiggy.com",
+"www.zoho.com",
+"www.anydesk.com",
+"www.cablenote.com",
 ]
 
 # Alert if greater than threshold
@@ -60,8 +72,10 @@ SC_MENU_ITEM_ROWS = (
         # ('speedtestt','oa;speedtest-cli --server 7379'),
         ('fast-arm','oa;fast-arm'),
         ('cloudtest','oa;npx speed-cloudflare-cli'),
-        ('speed-airtel','oa;speedtest -s 19081'),
-        ('speed-tata','oa;speedtest -s 23647'),
+        ('jio-speed','oa;speedtest -s 10195'),
+        ('dubai','oa;speedtest -s 22129'),
+        ('airtel-speed','oa;speedtest -s 18976'),
+        ('singapore','oa;speedtest -s 13623'),
         
         # ('Demo Script', 'demo.py', True),
     ),
