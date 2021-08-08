@@ -346,11 +346,9 @@ def packetLossNotifier():
         undeliveredMessages = []
       except:
         logger.info(f"Failed to deliver {failedMsg}")
-
-    # TODO: Message Queue (almost done) ( tested ok) 
-    # TODO: bot supervisor (Not implemented) (not needed imo) (bot didnt crash)
-  logger.info("packetLossNotifier has Stopped!.")
-  notifyUsers("packetLossNotifier has Stopped!.")
+        
+    logger.info("packetLossNotifier has Stopped!.")
+    notifyUsers("packetLossNotifier has Stopped!.")
 
 if __name__ == '__main__':
   threading.Thread(target=packetLossNotifier,daemon=True).start()

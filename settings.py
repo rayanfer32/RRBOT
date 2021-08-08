@@ -48,7 +48,7 @@ PING_SERVERS = ["www.google.com",
 LATENCY_ALERT = 100
 PACKETLOSS_ALERT = 7
 # sleep for pinger 
-PINGER_STOP_TIME = 24 #th hour 
+PINGER_STOP_TIME = 23 #th hour 
 PINGER_SLEEP_DURATION = 7 # sleep for 7 hours
 
 CMD_WHITE_LIST = {}
