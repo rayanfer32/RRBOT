@@ -267,86 +267,86 @@ def main():
     updater.idle()
 
 def packetLossNotifier():
-  import subprocess
-  import re
-  logger.info("packetLossNotifier Started.")
-  max_latency = -1.0
-  packetLoss = 0.0
-  serverId = 0 # counter for picking server sequentially
+    import subprocess
+    import re
+    logger.info("packetLossNotifier Started.")
+    max_latency = -1.0
+    packetLoss = 0.0
+    serverId = 0 # counter for picking server sequentially
 
-  while True:
-    # check for sleep time
-    now = datetime.now()
-    if(settings.PINGER_STOP_TIME == now.hour):
-        logger.info("packetLossNotifier on Sleep.")
-        notifyUsers("packetLossNotifier on Sleep.")
-        time.sleep(settings.PINGER_SLEEP_DURATION * 3600) # sleep for * hours
+    while True:
+        # check for sleep time
+        now = datetime.now()
+        if(settings.PINGER_STOP_TIME == now.hour):
+            logger.info("packetLossNotifier on Sleep.")
+            notifyUsers("packetLossNotifier on Sleep.")
+            time.sleep(settings.PINGER_SLEEP_DURATION * 3600) # sleep for * hours
 
-    pingServers = settings.PING_SERVERS
+        pingServers = settings.PING_SERVERS
 
-    # Increment serverId
-    server = pingServers[serverId]
-    if serverId == len(pingServers) - 1:
-      serverId = 0
-    else:
-      serverId += 1 
-    
-    try:
-        response = subprocess.Popen(
-            ['ping', '-c', '60', server], # send 60 pings to server
-            stderr=subprocess.STDOUT,  # get all output
-            stdout=subprocess.PIPE,
-            universal_newlines=True  # return string not bytes
-        )
-    except subprocess.CalledProcessError:
-        response = None
+        # Increment serverId
+        server = pingServers[serverId]
+        if serverId == len(pingServers) - 1:
+            serverId = 0
+        else:
+            serverId += 1 
 
-    max_latency = 0
-    latencies = []
+        try:
+            response = subprocess.Popen(
+                ['ping', '-c', '60', server], # send 60 pings to server
+                stderr=subprocess.STDOUT,  # get all output
+                stdout=subprocess.PIPE,
+                universal_newlines=True  # return string not bytes
+            )
+        except subprocess.CalledProcessError:
+            response = None
 
-    try:
-      for line in response.stdout:
-        if 'packet loss' in line:
-          # print(line.find('packet loss'))
-          packetLoss = float(line[len('received,')+line.find('received,'):line.find('% packet loss')])
-        if 'time=' in line:
-          latencyStr = line[len('time=')+line.find('time='):]
-          latencyStr = re.sub('ms','',latencyStr)
-          latency = float(latencyStr)
-          latencies.append(latency)
-      packetLoss = round(packetLoss)
-      max_latency = round(average(latencies))
-    except Exception as e:
-      logger.error(f"{e} line: {line}")
+        max_latency = 0
+        latencies = []
 
-    logger.info(f"Server:{server},Latency:{max_latency}ms,Loss:{packetLoss}%")
+        try:
+            for line in response.stdout:
+                if 'packet loss' in line:
+                # print(line.find('packet loss'))
+                    packetLoss = float(line[len('received,')+line.find('received,'):line.find('% packet loss')])
+                if 'time=' in line:
+                    latencyStr = line[len('time=')+line.find('time='):]
+                    latencyStr = re.sub('ms','',latencyStr)
+                    latency = float(latencyStr)
+                    latencies.append(latency)
+            packetLoss = round(packetLoss)
+            max_latency = round(average(latencies))
+        except Exception as e:
+            logger.error(f"{e} line: {line}")
 
-    msg = None
-    if (packetLoss > settings.PACKETLOSS_ALERT):
-        msg = '⚠️' * 5 +'\n'
-        msg += f"{packetLoss}% Packet Loss while pinging {server}\n"
-        msg += f"{max_latency}ms Latency Detected!"
-    elif (max_latency > settings.LATENCY_ALERT):
-        msg = '⏰' * 5 + '\n'
-        msg += 'High Latency.\n'
-        msg += f"{max_latency}ms Latency Detected while pinging {server}"
+        logger.info(f"Server:{server},Latency:{max_latency}ms,Loss:{packetLoss}%")
 
-    global undeliveredMessages
-    if msg != None:
-      try:
-        notifyUsers(msg)
-      except:
-        logger.info(f"Undelivered message: {msg}")
-        undeliveredMessages.append(msg)
+        msg = None
+        if (packetLoss > settings.PACKETLOSS_ALERT):
+            msg = '⚠️' * 5 +'\n'
+            msg += f"{packetLoss}% Packet Loss while pinging {server}\n"
+            msg += f"{max_latency}ms Latency Detected!"
+        elif (max_latency > settings.LATENCY_ALERT):
+            msg = '⏰' * 5 + '\n'
+            msg += 'High Latency.\n'
+            msg += f"{max_latency}ms Latency Detected while pinging {server}"
 
-    if undeliveredMessages != []:
-      try:
-        for failedMsg in undeliveredMessages:
-          notifyUsers(failedMsg)
-        undeliveredMessages = []
-      except:
-        logger.info(f"Failed to deliver {failedMsg}")
-        
+        global undeliveredMessages
+        if msg != None:
+            try:
+                notifyUsers(msg)
+            except:
+                logger.info(f"Undelivered message: {msg}")
+                undeliveredMessages.append(msg)
+
+        if undeliveredMessages != []:
+            try:
+                for failedMsg in undeliveredMessages:
+                    notifyUsers(failedMsg)
+                undeliveredMessages = []
+            except:
+                logger.info(f"Failed to deliver {failedMsg}")
+
     logger.info("packetLossNotifier has Stopped!.")
     notifyUsers("packetLossNotifier has Stopped!.")
 
