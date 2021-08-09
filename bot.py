@@ -40,6 +40,7 @@ def average(lst):
     return sum(lst) / len(lst) 
 
 def notifyUsers(msg):
+  logger.info(msg)
   for user_id in settings.ENABLED_USERS:
     bot.send_message(user_id,msg)
 
@@ -274,15 +275,21 @@ def packetLossNotifier():
     packetLoss = 0.0
     serverId = 0 # counter for picking server sequentially
 
+    def isSleepTime():
+        return (now.hour >= settings.PINGER_SLEEP_AT or now.hour < settings.PINGER_RESUME_AT)
+         
     while True:
         # check for sleep time
         now = datetime.now()
-        if(settings.PINGER_STOP_TIME == now.hour):
-            logger.info("packetLossNotifier on Sleep.")
-            notifyUsers("packetLossNotifier on Sleep.")
-            time.sleep(settings.PINGER_SLEEP_DURATION * 3600) # sleep for * hours
-            logger.info("packetLossNotifier Resumed.")
-            notifyUsers("packetLossNotifier Resumed.")
+        
+        if(isSleepTime()):
+            try:
+                sleepDuration = (settings.PINGER_RESUME_AT - now.hour) * 3600
+                notifyUsers(f"packetLossNotifier on Sleep for next {sleepDuration} hours.")
+                time.sleep(sleepDuration) # sleep the thread for remaining hours
+                notifyUsers("packetLossNotifier Resumed.")
+            except Exception as e:
+                logger.info(e)
 
         pingServers = settings.PING_SERVERS
 

@@ -27,9 +27,13 @@ nano /home/pi/.config/autostart/rrbot.desktop
 
 ```desktop
 [Desktop Entry]
+Name=RRBOT
+Comment=RRBOT
+Icon=/usr/share/icons/nuoveXT2/128x128/apps/utilities-system-monitor.png
+Exec=lxterminal --working-directory=/home/pi/rrbot -e python3 bot.py
 Type=Application
-Name=RRbot
-Exec=lxterminal -e python3 /home/pi/bot.py
+Terminal=false
+Categories=None;
 ```
 * BASH aliases
 ```

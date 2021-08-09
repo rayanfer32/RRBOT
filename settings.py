@@ -48,8 +48,8 @@ PING_SERVERS = ["www.google.com",
 LATENCY_ALERT = 100
 PACKETLOSS_ALERT = 7
 # sleep for pinger 
-PINGER_STOP_TIME = 23 #th hour 
-PINGER_SLEEP_DURATION = 7 # sleep for 7 hours
+PINGER_SLEEP_AT = 23 #rd hour 23:00
+PINGER_RESUME_AT = 7 # resume packetLossNotifier at 07:00
 
 CMD_WHITE_LIST = {}
 CMD_BLACK_LIST = {'rm'}
