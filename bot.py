@@ -281,9 +281,9 @@ def packetLossNotifier():
     def calcSleepDurHours(now):
         # this func only works if isSleepTime is true otherwise returns a negative value
         if now < settings.PINGER_SLEEP_AT:
-            return (settings.PINGER_RESUME_AT - now) * 3600
+            return (settings.PINGER_RESUME_AT - now)
         else:
-            return ( (24- now) + settings.PINGER_RESUME_AT ) *3600
+            return ( (24- now) + settings.PINGER_RESUME_AT )
 
     while True:
         # check for sleep time
@@ -291,9 +291,9 @@ def packetLossNotifier():
         
         if(isSleepTime()):
             try:
-                sleepDuration = calcSleepDurHours(now.hour)
-                notifyUsers(f"packetLossNotifier on Sleep for next {sleepDuration} hours.")
-                time.sleep(sleepDuration) # sleep the thread for remaining hours
+                sleepHoursRem = calcSleepDurHours(now.hour)
+                notifyUsers(f"packetLossNotifier on Sleep for next {sleepHoursRem} hours.")
+                time.sleep(sleepHoursRem * 3600) # sleep the thread for remaining hours
                 notifyUsers("packetLossNotifier Resumed.")
             except Exception as e:
                 logger.info(e)
