@@ -10,7 +10,10 @@ python3 bot.py
 
 create `secrets.env` file in the RRBOT directory
 add this line 
-`BOT_TOKEN=YOUR_BOT_TOKEN` 
+```env
+BOT_TOKEN=YOUR_BOT_TOKEN
+ENABLED_USERS = "3082434,3904883"
+```
 
 * Bot Commands
 ```bash
@@ -20,7 +23,7 @@ tasks - Check Running tasks
 ```
 
 * Autostart at boot
-```
+```sh
 mkdir /home/pi/.config/autostart
 nano /home/pi/.config/autostart/rrbot.desktop
 ```
