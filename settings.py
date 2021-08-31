@@ -42,6 +42,7 @@ PING_SERVERS = ["www.google.com",
 "www.zoho.com",
 "www.anydesk.com",
 "www.cablenote.com",
+"www.citrix.com",
 ]
 
 # Alert if greater than threshold
@@ -82,6 +83,7 @@ SC_MENU_ITEM_ROWS = (
     (
       ('speed-deenet','oa;speedtest -s 16512'),
       ('speed-act','oa;speedtest -s 7379'),
+      ('fast -u','oa;fast --upload'),
     ),
 )
 

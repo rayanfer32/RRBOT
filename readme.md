@@ -55,3 +55,8 @@ wget https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodrive
 tar xvf geckodriver*
 cp geckodriver /usr/local/bin
 ```
+
+* fast cli issue fix
+```
+https://issuehunt.io/r/sindresorhus/fast-cli/issues/59
+```
