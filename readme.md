@@ -38,6 +38,32 @@ Type=Application
 Terminal=false
 Categories=None;
 ```
+
+* Install mate system task manager
+
+`sudo apt-get install -y mate-system-monitor`
+
+* Measure temperature 
+
+`vcgencmd measure_temp`
+
+* GUI text editor
+
+`sudo apt install gedit`
+
+* Install Telnet
+
+`sudo apt install telnet`
+
+* Install nodejs and npx
+
+`curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -`
+`sudo apt install nodejs`
+
+* Install fping
+
+`sudo apt install fping`
+
 * BASH aliases
 ```
 alias temp='/opt/vc/bin/vcgencmd measure_temp'
